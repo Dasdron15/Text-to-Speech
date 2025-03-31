@@ -63,9 +63,7 @@ class Window(QWidget):
         temp_file = tempfile.NamedTemporaryFile(prefix="TTS", delete=False, dir=file_dir)
 
         file_name = text.split()
-
         file_name = "_".join(file_name)
-
         if len(file_name) > 20:
             file_name = file_name[:20]
 
