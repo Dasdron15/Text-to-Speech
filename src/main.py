@@ -1,10 +1,7 @@
-from PySide6.QtWidgets import QApplication
+import tkinter as tk
 from widgets import Window
-import sys
 
-app = QApplication(sys.argv)
+root = tk.Tk()
+window = Window(root)
 
-window = Window()
-window.show()
-
-app.exec()
+root.mainloop()
