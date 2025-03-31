@@ -1,7 +1,7 @@
 from PySide6.QtWidgets import QWidget, QPushButton, QLineEdit, QGridLayout, QFileDialog
 import threading
 from gtts import gTTS
-from playsound import playsound
+import pygame
 import tempfile
 import os
 
@@ -33,6 +33,7 @@ class Window(QWidget):
     # Function to play the text to speech audio
     def play(self):
         def play_thread():
+            pygame.mixer.init()
             text = self.entry.text()
 
             try:
@@ -43,7 +44,10 @@ class Window(QWidget):
                 temp_file.close()
 
                 file_path = temp_file.name
-                playsound(file_path)
+                sound = pygame.mixer.Sound(file_path)
+
+                sound.play()
+                
                 os.remove(file_path)
             except AssertionError:
                 pass
