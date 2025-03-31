@@ -62,7 +62,14 @@ class Window(QWidget):
         tts = gTTS(text)
         temp_file = tempfile.NamedTemporaryFile(prefix="TTS", delete=False, dir=file_dir)
 
-        tts.save(f"{temp_file.name}.mp3")
+        file_name = text.split()
+
+        file_name = "_".join(file_name)
+
+        if len(file_name) > 20:
+            file_name = file_name[:20]
+
+        tts.save(f"{file_dir}/{file_name}.mp3")
         temp_file.close()
         file_path = temp_file.name
         os.remove(file_path)
