@@ -58,16 +58,16 @@ class Window(QWidget):
     # Function to download text to speech audio
     def download(self):
         file_dir = QFileDialog.getExistingDirectory()
-        text = self.entry.text()
+        if not file_dir:
+            return
+
+        text = self.entry.text().strip()
+        if not text:
+            return
+
         tts = gTTS(text)
-        temp_file = tempfile.NamedTemporaryFile(prefix="TTS", delete=False, dir=file_dir)
 
-        file_name = text.split()
-        file_name = "_".join(file_name)
-        if len(file_name) > 20:
-            file_name = file_name[:20]
+        file_name = "_".join(text.split())[:20]
+        file_path = os.path.join(file_dir, f"{file_name}.mp3")
 
-        tts.save(f"{file_dir}/{file_name}.mp3")
-        temp_file.close()
-        file_path = temp_file.name
-        os.remove(file_path)
+        tts.save(file_path)
