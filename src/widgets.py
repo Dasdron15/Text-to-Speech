@@ -60,8 +60,3 @@ class Window:
         file_path = os.path.join(file_dir, f"{file_name}.mp3")
 
         tts.save(file_path)
-
-if __name__ == "__main__":
-    root = tk.Tk()
-    app = Window(root)
-    root.mainloop()
